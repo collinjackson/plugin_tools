@@ -10,6 +10,7 @@ import 'package:path/path.dart' as p;
 import 'analyze_command.dart';
 import 'build_examples_command.dart';
 import 'common.dart';
+import 'flutterfire_coverage_command.dart';
 import 'format_command.dart';
 import 'java_test_command.dart';
 import 'test_command.dart';
@@ -35,6 +36,7 @@ void main(List<String> args) {
     ..addCommand(new FormatCommand(packagesDir))
     ..addCommand(new BuildExamplesCommand(packagesDir))
     ..addCommand(new JavaTestCommand(packagesDir));
+    ..addCommand(new FlutterFireCoverageCommand(packagesDir));
 
   commandRunner.run(args).catchError((ToolExit e) {
     exit(e.exitCode);

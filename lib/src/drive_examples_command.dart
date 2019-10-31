@@ -12,8 +12,11 @@ import 'package:path/path.dart' as p;
 import 'common.dart';
 
 class DriveExamplesCommand extends PluginCommand {
-  DriveExamplesCommand(Directory packagesDir, FileSystem fileSystem)
-      : super(packagesDir, fileSystem);
+  DriveExamplesCommand(
+    Directory packagesDir,
+    FileSystem fileSystem, {
+    ProcessRunner processRunner = const ProcessRunner(),
+  }) : super(packagesDir, fileSystem, processRunner: processRunner);
 
   @override
   final String name = 'drive-examples';
@@ -65,6 +68,7 @@ class DriveExamplesCommand extends PluginCommand {
           continue;
         }
         print('RUNNING DRIVER TEST for ${p.join(packageName, deviceTestPath)}');
+        // TODO(jackson): This should use processRunner
         final io.Process process = await io.Process.start(
           'flutter',
           <String>['drive', deviceTestPath],
